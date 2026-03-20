@@ -148,10 +148,10 @@
     }
 
     header {
-        @apply glass sticky top-0 z-50;
+        @apply sticky top-0 w-full z-50 ;
 
         nav {
-            @apply flex flex-row justify-between mx-auto container sm:px-10 px-5 py-4;
+            @apply flex  flex-row items-center justify-between w-full h-full px-6 sm:px-10;
         }
 
         .logo {
@@ -163,7 +163,11 @@
         }
 
         ul {
-            @apply flex flex-row items-center gap-6;
+            @apply m-0 flex list-none flex-row items-center gap-2 p-0;
+
+            a {
+                @apply rounded-full px-4 py-2 text-sm text-light-100 transition-colors hover:bg-white/10;
+            }
         }
     }
 

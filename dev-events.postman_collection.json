@@ -1,0 +1,153 @@
+{
+  "info": {
+    "_postman_id": "dev-events-api-collection",
+    "name": "Dev Events API",
+    "description": "API collection for Dev Events Next.js 16 app.\n\nBase URL variable: {{base_url}} = http://localhost:3000\n\nNOTE: POST /api/events requires an actual image file upload (not a URL).\nSelect any .jpg/.png from your local machine in the 'image' field.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "event_slug",
+      "value": "cloud-next-2026",
+      "type": "string",
+      "description": "Slug is auto-generated from the title. 'Cloud Next 2026' => 'cloud-next-2026'"
+    }
+  ],
+  "item": [
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Get All Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/events",
+              "host": ["{{base_url}}"],
+              "path": ["api", "events"]
+            },
+            "description": "Returns all events sorted by newest first."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Event by Slug",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/events/{{event_slug}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "events", "{{event_slug}}"]
+            },
+            "description": "Fetch a single event by its slug. Slug is auto-generated from the title on creation.\n\nExample: title 'Cloud Next 2026' => slug 'cloud-next-2026'"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Event",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Cloud Next 2026",
+                  "type": "text",
+                  "description": "Required. Max 100 chars."
+                },
+                {
+                  "key": "description",
+                  "value": "Google's premier cloud computing event, showcasing innovations in AI, infrastructure, and enterprise solutions.",
+                  "type": "text",
+                  "description": "Required. Max 1000 chars."
+                },
+                {
+                  "key": "overview",
+                  "value": "Cloud Next 2025 highlights the latest in cloud-native development, Kubernetes, AI, and enterprise scalability. Developers, architects, and executives gather to learn about new Google Cloud services, best practices, and success stories.",
+                  "type": "text",
+                  "description": "Required. Max 500 chars."
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": [],
+                  "description": "Required. Select a local image file (.jpg, .png, etc). It will be uploaded to Cloudinary."
+                },
+                {
+                  "key": "venue",
+                  "value": "Moscone Center",
+                  "type": "text",
+                  "description": "Required."
+                },
+                {
+                  "key": "location",
+                  "value": "San Francisco, CA",
+                  "type": "text",
+                  "description": "Required."
+                },
+                {
+                  "key": "date",
+                  "value": "2025-04-10",
+                  "type": "text",
+                  "description": "Required. Format: YYYY-MM-DD"
+                },
+                {
+                  "key": "time",
+                  "value": "08:30",
+                  "type": "text",
+                  "description": "Required. Format: HH:MM (24-hour) or HH:MM AM/PM"
+                },
+                {
+                  "key": "mode",
+                  "value": "hybrid",
+                  "type": "text",
+                  "description": "Required. Allowed values: online | offline | hybrid"
+                },
+                {
+                  "key": "audience",
+                  "value": "Cloud engineers, DevOps, enterprise leaders, AI researchers",
+                  "type": "text",
+                  "description": "Required."
+                },
+                {
+                  "key": "organizer",
+                  "value": "Google Cloud organizes Cloud Next to connect global businesses, developers, and innovators with the latest technologies and best practices in cloud computing.",
+                  "type": "text",
+                  "description": "Required."
+                },
+                {
+                  "key": "tags",
+                  "value": "[\"Cloud\",\"DevOps\",\"Kubernetes\",\"AI\"]",
+                  "type": "text",
+                  "description": "Required. Must be a JSON array string. At least one tag required."
+                },
+                {
+                  "key": "agenda",
+                  "value": "[\"08:30 AM - 09:30 AM | Keynote: AI-Driven Cloud Infrastructure\",\"09:45 AM - 11:00 AM | Deep Dives: Kubernetes, Data Analytics, Security\",\"11:15 AM - 12:30 PM | Product Demos & Networking\",\"12:30 PM - 01:30 PM | Lunch\",\"01:30 PM - 03:00 PM | Workshops: Scaling with GCP\",\"03:15 PM - 04:30 PM | Fireside Chat: The Future of Enterprise Cloud\"]",
+                  "type": "text",
+                  "description": "Required. Must be a JSON array string. At least one item required."
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/events",
+              "host": ["{{base_url}}"],
+              "path": ["api", "events"]
+            },
+            "description": "Creates a new event. Sends multipart/form-data.\n\n⚠️ IMPORTANT:\n- 'image' must be a real file upload (not a URL)\n- 'tags' and 'agenda' must be JSON array strings\n- 'mode' must be exactly: online | offline | hybrid\n\nThe slug is auto-generated from the title on the server."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
